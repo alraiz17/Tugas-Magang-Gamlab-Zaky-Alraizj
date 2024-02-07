@@ -1,0 +1,55 @@
+//untuk camera agar follow player
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FollowPlayer : MonoBehaviour
+
+{
+    public GameObject player;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position = player.transform.position + new Vector3(0, 5, -7); // new Vector3(0,5,-7) adalah untuk menentukan offset camera agar camera tidak persis di posisi yang sama dengan player
+    }
+}
+
+//untuk control mobil
+using System.Collections;
+using System.Collections.Generic;
+using System.Numerics;
+using UnityEngine;
+using UnityEngine.Jobs;
+
+public class PlayerController : MonoBehaviour
+    
+{
+//ini adalah inisialisasi variabel beserta nilainya
+    public float turnSpeed = 5.0f;
+    public float speed = 5.0f;
+    public float horizontalInput;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //Move the vehicle forward
+//Diberi *Time.deltaTime karena untuk per detik, bukan per frame
+        transform.Translate(UnityEngine.Vector3.forward * Time.deltaTime * speed);//Vector3.forward adalah x=0,7=0,z=1
+        transform.Translate(UnityEngine.Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);//ini code untuk membelokkan mobil.... kalau positif = kanan, negatif = kiri.
+        horizontalInput = Input.GetAxis("Horizontal");
+    }
+}
+
+
+//Disini,saya masih sangat pemula dan mengikuti apa yang diajari oleh Unity learn sendiri. Tapi dari sini saya bisa menentukan bahwa saya sangat tertarik untuk mengenal game dev lebih banyak lagi
